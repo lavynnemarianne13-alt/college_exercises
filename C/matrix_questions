@@ -1,0 +1,511 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <locale.h>
+#include <ctype.h>
+#include <windows.h>
+#define delay(ms) Sleep(ms)
+
+int i,j,operacao,q,elemento;
+int matriz[3][5];
+
+void MenuQuestao(){
+    elemento=1;
+
+    for(i=0;i<3;i++){
+        for(j=0;j<5;j++){
+            matriz[i][j]=elemento;
+            elemento++;
+        }
+    }
+
+    printf("+===============================+\n");
+    printf("|         Menu Quest�es         |\n");
+    printf("+===============================+\n");
+
+    for(i=0;i<3;i++){
+        for(j=0;j<5;j++){
+            printf("  |%3d",matriz[i][j]);       
+        }
+        printf("|\n");
+    }
+
+    printf("+===============================+\n");
+    printf("|     Selecione uma quest�o     |\n");
+    printf("+===============================+\n");
+    scanf("%d",&q);
+}
+
+void Questao01(){
+
+    float salario,valor_energia,novo_valor,valor_unidade;
+    int quantidade;
+
+    printf("Conta de Energia: \n");
+    printf("Digite o valor do seu sal�rio m�nimo: \n");
+    scanf("%f",&salario);
+    printf("Digite a quantidade de quilowatts consumida: \n");
+    scanf("%d",&quantidade);
+    valor_unidade=(salario/7)/100;
+    valor_energia=(valor_unidade*quantidade);
+    novo_valor=(valor_energia*0.9);
+
+    printf("O valor em de cada quilowatt � igual a : R$%.2f\nO valor da conta de energia � igual a : R$%.2f\nO valor da conta com desconto de 10%% � igual a : R$%.2f\n",valor_unidade,valor_energia,novo_valor);
+    
+}
+void Questao02(){
+
+    int i,tamanho,c;
+    char frase[42];
+
+    while((c=getchar()) != '\n' && c != EOF);
+
+    do {
+        printf("Digite uma frase (m�ximo 40 letras): ");
+        if(fgets(frase, sizeof(frase), stdin) == NULL){
+            printf("Erro!\n");
+            return;
+        }
+
+        if(frase[strcspn(frase, "\n")] != '\n'){
+            while((c = getchar()) != '\n' && c != EOF);
+            printf("Erro!Voc� digitou uma frase com mais de 40 letras\n");
+            frase[0] = '\0';
+            continue;
+        }
+
+        frase[strcspn(frase, "\n")] = 0;
+        tamanho = strlen(frase);
+
+        if(tamanho == 0){
+            printf("Erro!Voc� n�o digitou nada\n");
+        }
+
+    } while(tamanho==0 || frase[0]=='\0');
+
+    printf("Sua frase foi: \n");
+    for(i=0;i<tamanho;i++){
+        printf("%c\n", frase[i]);
+        Sleep(300);
+	}
+}
+void Questao03(){
+
+    int quantidade,codigo;
+    float valor;
+
+    printf("+====================================+\n");
+    printf("|       Lanchonete - LANCHEBEM       |\n");
+    printf("+====================================+\n");
+    printf("| Especifica��o:  | Codigo: | Pre�o: |\n");
+    printf("| Cachorro Quente |   100   | R$4,20 |\n");
+    printf("| Bauru Simples   |   101   | R$3,30 |\n");
+    printf("| Bauru com Ovo   |   102   | R$5,50 |\n");
+    printf("| Hamb�rger       |   103   | R$6,20 |\n");
+    printf("| Cheeseburguer   |   104   | R$5,30 |\n");
+    printf("| Refrigerante    |   105   | R$4,50 |\n");
+    printf("+====================================+\n");
+    printf("Digite o c�digo do pedido: \n");
+    scanf("%d",&codigo);
+    printf("Digite a quantidade do lanche que voc� deseja: \n");
+    scanf("%d",&quantidade);
+    if (codigo==100){
+        valor=(quantidade*4.2);        
+    }else if(codigo==101){
+        valor=(quantidade*3.3);
+    }else if(codigo==102){
+        valor=(quantidade*5.5);
+    }else if(codigo==103){
+        valor=(quantidade*6.2);
+    }else if(codigo==104){
+        valor=(quantidade*5.3);
+    }else if(codigo==105){
+        valor=(quantidade*4.5);
+    }else{
+        printf("Digite um c�digo v�lido!\n");
+    }
+
+    printf("O valor a ser pago no pedido �: RS%.2f\n",valor);
+    
+} 
+void Questao04(){
+
+    char genero;
+    float peso,altura;
+
+
+    printf("Digite seu g�nero (F para feminino e M para masculino): \n");
+    scanf("%c",&genero);
+    printf("Digite sua altura (em metros): \n");
+    scanf("%f",&altura);
+    if(genero=='M'){
+        peso=((72.7*altura)-58);
+    }else if(genero=='F'){
+        peso=((62.1*altura)-44.7);
+    }else{
+        printf("Digite um g�nero v�lido\n");
+    }
+
+    printf("Seu peso ideal �: %.2f quilos\n",peso);
+
+}
+void Questao05(){
+
+    int saldo;
+    float valor;
+
+    printf("Digite seu saldo m�dio no �ltimo ano (0 a 601): \n");
+    scanf("%d",&saldo);
+    if(saldo<=200){
+        printf("Infelizmente voc� n�o obteve nenhum cr�dito\n");
+    }else if(saldo>=201 && saldo<=400){
+        valor=saldo*0.2;
+    }else if(saldo>=401 && saldo<= 600){
+        valor=saldo*0.3;
+    }else if(saldo >= 601){
+        valor=saldo*0.4;
+    }else{
+        printf("Digite um saldo v�lido!\n");
+    }
+
+    printf("Seu saldo m�dio de %d liberou um valor de cr�dito de R$%.2f\n",saldo,valor);
+
+}
+void Questao06(){ 
+
+    char nome[50],letra;
+    int i,z,total,vogais; 
+    float porcentagem;
+    vogais = 0;
+
+    while((z=getchar()) != '\n' && z != EOF);
+
+    printf("Digite um nome: ");
+    if(fgets(nome, sizeof(nome), stdin) != NULL){
+        nome[strcspn(nome, "\n")] = 0;
+        total=strlen(nome);
+
+        if(total==0){
+            printf("Erro!Digite um nome v�lido\n");
+            return;
+        }
+
+        for(i=0;i<total;i++){
+            letra=tolower(nome[i]);
+            if(letra=='a'||letra=='e'||letra=='i'||letra=='o'||letra=='u')
+                vogais++;
+        }
+
+        porcentagem=((float)vogais/total)*100;
+
+        printf("Total de caracteres: %d\n", total);   
+        printf("Quantidade de vogais: %d\n", vogais);  
+        printf("Porcentagem de vogais: %.2f%%\n", porcentagem);
+    } else {
+        printf("Erro! Digite um nome valido\n");
+    }
+    
+}
+void Questao07(){
+
+    int idade,dias;
+
+    printf("Digite sua idade (em anos): \n");
+    scanf("%d",&idade);
+    dias=(idade*365);
+    if(dias<6570){
+        printf("Voc� � menor de idade!\n");
+    }else{
+        printf("Voc� � maior de idade!\n");
+    }
+}
+void Questao08(){
+    
+    int clima;
+
+    printf("Como est� o dia hoje?\n1. Nublado\n2. Ensolarado\n3. Chuvoso\n");
+    printf("Digite a op��o que mais se encaixa no seu dia: \n");
+    scanf("%d",&clima);
+    if(clima==1){
+        printf("Temperatura fria\n");
+    }else if(clima==2){
+        printf("Temperatura agrad�vel\n");
+    }else if(clima==3){
+        printf("Temperatura quente\n");
+    }else{
+        printf("Op��o inv�lida\n");
+    }
+
+}
+void Questao09(){
+
+    int n,antecessor,sucessor;
+
+    printf("Digite um n�mero: \n");
+    scanf("%d",&n);
+    antecessor=(n-1);
+    sucessor=(n+1);
+
+    printf("O antecessor do n�mero %d � o n�mero %d e o sucessor dele � o n�mero %d\n",n,antecessor,sucessor);
+}
+void Questao10(){
+
+    int n,resultado;
+
+    printf("Digite um numero: \n");
+    scanf("%d",&n);
+    if(n%2==0&&n%3==0&&n%5==0){
+		resultado=n*2*3*5;
+        printf("O numero � divisivel por 2, por 3 e por 5 e o resultado da sua multiplica��o � igual a %d\n",resultado);
+	}else if(n%2==0&&n%3==0){
+        resultado=n*2*3;
+        printf("O numero � divisivel por 2 e por 3 e o resultado da sua multiplica��o � igual a %d\n",resultado);
+    }else if(n%2==0&&n%5==0){
+        resultado=n*2*5;
+        printf("O numero � divisivel por 2 e por 5 e o resultado da sua multiplica��o � igual a %d\n",resultado);
+    }else if(n%3==0&&n%5==0){
+        resultado=n*3*5;
+        printf("O numero � divisivel por 3 e por 5 e o resultado da sua multiplica��o � igual a %d\n",resultado);
+    }else if(n%2==0){
+        resultado=n*2;
+        printf("O numero � divisivel por 2 e o resultado da sua multiplica��o � igual a %d\n",resultado);
+    }else if(n%3==0){
+        resultado=n*3;
+        printf("O numero � divisivel por 3 e o resultado da sua multiplica��o � igual a %d\n",resultado);
+    }else if(n%5==0){
+        resultado=n*5;
+        printf("O numero � divisivel por 5 e o resultado da sua multiplica��o � igual a %d\n",resultado);
+    }else{
+        printf("O numero n�o � divisivel por 2, nem por 3 e nem por 5\n");
+    }
+
+}
+void Questao11(){
+    
+    int i,j,Dl,Dc;
+
+    printf("Digite a dimens�o da linha:\n");
+    scanf("%d",&Dl);
+    printf("Digite a dimens�o da coluna:\n");
+    scanf("%d",&Dc);
+    int matriz[Dl][Dc];
+
+    printf("Digite os valores da matriz de %d X %d com %d elementos:\n", Dl, Dc, Dl * Dc);
+    for(i=0;i<Dl;i++)
+        for(j=0;j<Dc;j++)
+            scanf("%d",&matriz[i][j]);
+
+    printf("Matriz completa:\n");
+    for(i=0;i<Dl;i++){
+        for(j=0;j<Dc;j++)
+            printf("%3d ",matriz[i][j]);
+        printf("\n");
+    }
+
+    if(Dl==Dc){
+        printf("Elementos da diagonal secund�ria:\n");
+        for(i=0;i<Dl;i++)
+            printf("%3d\n", matriz[i][Dc-1-i]);
+    } else {
+        printf("Nao possui diagonal secund�ria!\n");
+    }
+}
+
+void Questao12(){
+
+    int i,j,k,matriz1[3][3],matriz2[3][3],matriz3[3][3];
+
+    printf("Digite os valores da primeira matriz:\n");
+    for(i=0;i<3;i++)
+        for(j=0;j<3;j++)
+            scanf("%d",&matriz1[i][j]);
+
+    printf("Digite os valores da segunda matriz:\n");
+    for(i=0;i<3;i++)
+        for(j=0;j<3;j++)
+            scanf("%d",&matriz2[i][j]);
+
+    for(i=0;i<3;i++)
+        for(j=0;j<3;j++){
+            matriz3[i][j] = 0;
+            for(k=0;k<3;k++)
+                matriz3[i][j]=matriz3[i][j]+(matriz1[i][k]*matriz2[k][j]);
+        }
+
+    printf("Matriz 1:\n");
+    for(i=0;i<3;i++){
+        for(j=0;j<3;j++)
+            printf("%3d ",matriz1[i][j]);
+        printf("\n");
+    }
+
+    printf("Matriz 2:\n");
+    for(i=0;i<3;i++){
+        for(j=0;j<3;j++)
+            printf("%3d ",matriz2[i][j]);
+        printf("\n");
+    }
+
+    printf("Resultado M1 x M2:\n");
+    for(i=0;i<3;i++){
+        for(j=0;j<3;j++)
+            printf("%3d ",matriz3[i][j]);
+        printf("\n");
+    }
+}
+void Questao13(){
+    
+    int i,j,matriz1[2][2],matriz2[2][2],matriz3[2][2];
+
+    printf("Digite os valores da primeira matriz (2x2):\n");
+    for(i=0;i<2;i++)
+        for(j=0;j<2;j++)
+            scanf("%d",&matriz1[i][j]);
+
+    printf("Digite os valores da segunda matriz (2x2):\n");
+    for(i=0;i<2;i++)
+        for(j=0;j<2;j++)
+            scanf("%d",&matriz2[i][j]);
+
+    for(i=0;i<2;i++)
+        for(j=0;j<2;j++)
+            matriz3[i][j]=matriz1[i][j]+matriz2[i][j];
+
+    printf("Matriz 1:\n");
+    for(i=0;i<2;i++){
+        for(j=0;j<2;j++)
+            printf("%3d ",matriz1[i][j]);
+        printf("\n");
+    }
+
+    printf("Matriz 2:\n");
+    for(i=0;i<2;i++){
+        for(j=0;j<2;j++)
+            printf("%3d ",matriz2[i][j]);
+        printf("\n");
+    }
+
+    printf("Resultado M1 + M2:\n");
+    for(i=0;i<2;i++){
+        for(j=0;j<2;j++)
+            printf("%3d ",matriz3[i][j]);
+        printf("\n");
+    }
+
+}
+void Questao14(){
+
+    int i,j,matriz[3][3],soma;
+    soma=0;
+
+    printf("Digite os valores da matriz (3x3):\n");
+    for(i=0;i<3;i++)
+        for(j=0;j<3;j++)
+            scanf("%d",&matriz[i][j]);
+
+    printf("Matriz:\n");
+    for(i=0;i<3;i++){
+        for(j=0;j<3;j++)
+            printf("%3d ",matriz[i][j]);
+        printf("\n");
+    }
+
+    for(i=0;i<3;i++)
+        soma=soma+matriz[i][i];
+
+    printf("Soma da diagonal principal: %d\n", soma);
+}
+void Questao15(){
+
+    int i,j,Dl,Dc;
+
+    printf("Digite a dimens�o da linha:\n");
+    scanf("%d",&Dl);
+    printf("Digite a dimens�o da coluna:\n");
+    scanf("%d",&Dc);
+
+    if(Dl != Dc){
+        printf("Erro! A matriz deve ser quadratica\n");
+        return;
+    }
+
+    int matriz[Dl][Dc];
+    printf("Digite os valores da matriz de %d X %d com %d elementos:\n", Dl, Dc, Dl * Dc);
+    for(i=0;i<Dl;i++)
+        for(j=0;j<Dc;j++)
+            scanf("%d",&matriz[i][j]);
+
+    printf("Matriz original:\n");
+    for(i=0;i<Dl;i++){
+        for(j=0;j<Dc;j++)
+            printf("%3d ",matriz[i][j]);
+        printf("\n");
+    }
+
+    printf("Matriz dividida por 2:\n");
+    for(i=0;i<Dl;i++){
+        for(j=0;j<Dc;j++)
+            printf("%3d ",matriz[i][j] / 2);
+        printf("\n");
+    }
+
+}
+
+int main(){
+	setlocale(LC_ALL, "Portuguese");
+        MenuQuestao();
+    do{
+        switch(q){
+            case 1:
+                Questao01();
+                break;
+            case 2:
+                Questao02();
+                break;
+            case 3:
+                Questao03();
+                break;
+            case 4:
+                Questao04();
+                break;
+            case 5:
+                Questao05();
+                break;
+            case 6:
+                Questao06();
+                break;
+            case 7:
+                Questao07();
+                break;
+            case 8:
+                Questao08();
+                break;
+            case 9:
+                Questao09();
+                break;
+            case 10:
+                Questao10();
+                break;
+            case 11:
+                Questao11();
+                break;
+            case 12:
+                Questao12();
+                break;
+            case 13:
+                Questao13();
+                break;
+            case 14:
+                Questao14();
+                break;
+            case 15:
+                Questao15();
+                break;
+            default:
+                printf("Questao inv�lida!\n");
+        }
+
+        printf("Deseja executar outra quest�o ou zero para sair\n");
+        scanf("%d",&q);
+    }while(q != 0);
+}
