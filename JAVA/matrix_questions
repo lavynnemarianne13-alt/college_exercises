@@ -1,0 +1,451 @@
+import java.util.Scanner;
+
+public class SistemaQuestoes {
+
+    static Scanner sc = new Scanner(System.in);
+    static int[][] matriz = new int[3][5];
+    static int i,j,questao,elemento;
+
+    public static void MenuQuestao() {
+
+        elemento=1;
+        for(i=0;i<3;i++){
+            for(j=0;j<5;j++){
+                matriz[i][j]=elemento++;
+            }
+        }
+        System.out.println("+===========================+");
+        System.out.println("       Menu de Questões      ");
+        System.out.println("+===========================+");
+        for(i=0;i<3;i++){
+            for(j=0;j<5;j++){
+                System.out.printf(" |%3d", matriz[i][j]);
+            }
+            System.out.println(" |");
+        }
+        System.out.println("+===========================+");
+        System.out.println("    Selecione uma Questâo    ");
+        System.out.println("+===========================+");
+        questao=sc.nextInt();
+    }
+    public static void Questao01(){
+
+        int quantidade;
+        float salario,valor_unidade,valor_energia,valor_com_desconto;
+
+        System.out.println("Digite seu Salário Mínimo: ");
+        salario=sc.nextFloat();
+        System.out.println("Digite a Quantidade de Quilowatts Usada: ");
+        quantidade=sc.nextInt();
+        valor_unidade=((salario/7)/100);
+        valor_energia=(valor_unidade*quantidade);
+        valor_com_desconto=(valor_energia*0.9f);
+
+        System.out.printf("Valor Unidade De Quilowatt: R$%.2f\n",valor_unidade);
+        System.out.printf("Valor Conta de Energia sem Desconto: R$%.2f\n",valor_energia);
+        System.out.printf("Valor Conta de Energia com Desconto: R$%.2f\n",valor_com_desconto);
+
+    }
+    public static void Questao02() throws InterruptedException {
+
+        int i;
+        String frase;
+
+        do {
+            System.out.print("Digite uma frase (máximo 40 letras): ");
+            frase = sc.nextLine();
+
+            if(frase.length()>40) {
+                System.out.println("Erro! Mais de 40 caracteres");
+            }
+
+        } while (frase.length()==0 || frase.length()>40);
+
+        for (i=0;i<frase.length();i++) {
+            System.out.println(frase.charAt(i));
+            Thread.sleep(300);
+        }
+    }
+    public static void Questao03(){
+
+        int codigo,quantidade;
+        float valor_total;
+        valor_total=0;
+
+        System.out.println("+===================================+");
+        System.out.println("|      LANCHONETE - LANCHEBEM       |");
+        System.out.println("+===================================+");
+        System.out.println("|  Especificação | Código |  Preço  |");
+        System.out.println("+===================================+");
+        System.out.println("| Cachorro quente |  .100  | R$4.20 |");
+        System.out.println("|  Bauru simples  |  .101  | R$3.30 |");
+        System.out.println("|  Bauru com ovo  |  .102  | R$5.50 |");
+        System.out.println("|    Hambúrger    |  .103  | R$6.20 |");
+        System.out.println("|  Cheeseburguer  |  .104  | R$5.30 |");
+        System.out.println("|  Refrigerante   |  .105  | R$4.50 |");
+        System.out.println("+===================================+");
+
+        System.out.println("Digite o Código do seu Pedido: ");
+        codigo=sc.nextInt();
+        System.out.println("Digite a Quantidade que Desejada: ");
+        quantidade=sc.nextInt();
+
+        if(codigo==100){
+            valor_total=(quantidade*4.2f);
+        }else if(codigo==101){
+            valor_total=(quantidade*3.3f);
+        }else if(codigo==102){
+            valor_total=(quantidade*5.5f);
+        }else if(codigo==103){
+            valor_total=(quantidade*6.2f);
+        }else if(codigo==104){
+            valor_total=(quantidade*5.3f);
+        }else if(codigo==105){
+            valor_total=(quantidade*4.5f);
+        }else{
+            System.out.println("Digite um Código Válido!");
+        }
+        System.out.printf("O Valor da Compra foi Igual a: R$%.2f\n",valor_total);
+    }
+    public static void Questao04(){
+
+        char genero;
+        float altura,peso;
+        peso=0;
+
+        System.out.println("Digite seu Gênero: ");
+        genero=sc.next().charAt(0);
+        System.out.println("Digite sua Altura: ");
+        altura=sc.nextFloat();
+
+        if(genero=='M'){
+            peso=((72.5f*altura)-58);
+        }else if (genero=='F'){
+            peso=((62.1f*altura)-44.7f);
+        }
+        System.out.printf("Seu peso Ideal é Igual a: %.2fkg\n",peso);
+    }
+    public static void Questao05(){
+
+        int saldo;
+        float credito;
+        credito=0;
+
+        System.out.println("Digite seu Saldo Médio: ");
+        saldo=sc.nextInt();
+        if(saldo>=0 && saldo<=200){
+            credito=0;
+        }else if(saldo>=201 && saldo<=400){
+            credito=(saldo*0.2f);
+        }else if(saldo>=401 && saldo<=600){
+            credito=(saldo*0.3f);
+        }else if(saldo>=601){
+            credito=(saldo*0.4f);
+        }else{
+            System.out.println("Digite um Código Válido!");
+        }
+        System.err.printf("Seu Percentual de Crédito é Igual a: R$%.2f\n",credito);
+    }
+    public static void Questao06(){
+
+        sc.nextLine();
+        int vogais;
+        float porcentagem;
+        String nome;
+        vogais=0;
+
+        System.out.print("Digite um Nome: ");
+        nome=sc.nextLine();
+        for (char c:nome.toLowerCase().toCharArray()) {
+            if ("aeiou".indexOf(c) != -1) {
+                vogais++;
+            }
+        }
+        porcentagem = ((float)vogais/nome.length()*100);
+        System.out.println("Total de Caracteres: " + nome.length());
+        System.out.println("Total de Vogais: " + vogais);
+        System.out.printf("Porcentagem de Vogais no Nome: %.2f%%\n",porcentagem);
+    }
+    public static void Questao07(){
+
+        int idade,dias;
+
+        System.out.println("Digite sua Idade");
+        idade=sc.nextInt();
+        dias=(idade*365);
+        if(dias<6570){
+            System.out.println("Você é Menor de Idade!");
+        }else{
+            System.out.println("Você é Maior de Idade!");
+        }
+    }
+    public static void Questao08(){
+
+        int opcao;
+
+        System.out.println("Como Está o Dia Hoje?");
+        System.out.println("1. Nublado.....");
+        System.out.println("2. Ensolarado..");
+        System.out.println("3. Chuvoso.....");
+        opcao=sc.nextInt();
+        if(opcao==1){
+            System.out.println("Temperatura Agradável");
+        }else if(opcao==2){
+            System.out.println("Temperatura Quente");
+        }else if(opcao==3){
+            System.out.println("Temperatura Fria");
+        }else{
+            System.out.println("Digite uma Opção Válida");
+        }
+    }
+    public static void Questao09(){
+
+        int n,antecessor,sucessor;
+
+        System.out.println("Digite um Número:");
+        n=sc.nextInt();
+        antecessor=(n-1);
+        sucessor=(n+1);
+        System.out.printf("O Antecessor do seu Número é %d e o Sucerror do seu Número é %d: \n",antecessor,sucessor);
+    }
+    public static void Questao10(){
+
+        int n,total;
+
+        System.out.println("Digite um Número");
+        n=sc.nextInt();
+        if(n%2==0 && n%3==0 && n%5==0){
+            total=(n*2*3*5);
+            System.out.println("Seu Número é Divisivel por 2 por 3 e por 5 e o Total da Multiplicação é Igual a: "+total);
+        }else if(n%2==0 && n%3==0){
+            total=(n*2*3);
+            System.out.println("Seu Número é Divisivel por 2 e por 3 e o Total da Multiplicação é Igual a: "+total);
+        }else if(n%2==0 && n%5==0){
+            total=(n*2*5);
+            System.out.println("Seu Número é Divisivel por 2 e por 5 e o Total da Multiplicação é Igual a: "+total);
+        }else if(n%2==0){
+            total=(n*2);
+            System.out.println("Seu Número é Divisivel por 2 e o Total da Multiplicação é Igual a: "+total);
+        }else if(n%3==0){
+            total=(n*3);
+            System.out.println("Seu Número é Divisivel por 3 e o Total da Multiplicação é Igual a: "+total);
+        }else if(n%5==0){
+            total=(n*5);
+            System.out.println("Seu Número é Divisivel por 5 e o Total da Multiplicação é Igual a: "+total);
+        }else{
+            System.out.println("Seu Número não é Divisivel nem por 2 nem por 3 e nem por 5");
+        }
+
+    }
+    public static void Questao11() {
+
+        int Dl,Dc,i,j;
+
+        System.out.print("Digite a Dimensão da Linha:");
+        Dl = sc.nextInt();
+        System.out.print("Digite a Dimensão da Coluna:");
+        Dc = sc.nextInt();
+        int[][]matriz=new int[Dl][Dc];
+        System.out.printf("Digite os Valores da Matriz de %d X %d com %d Elementos:\n", Dl, Dc, Dl * Dc);
+        for(i=0;i<Dl;i++)
+            for(j=0;j<Dc;j++)
+                matriz[i][j]=sc.nextInt();
+        System.out.println("Matriz Completa");
+        for(i=0;i<Dl;i++) {
+            for(j=0;j<Dc;j++)
+                System.out.printf("%3d ",matriz[i][j]);
+            System.out.println();
+        }
+        if(Dl == Dc){
+            System.out.println("Elementos da Diagonal Secundária:");
+            for(i=0;i<Dl;i++)
+                System.out.println(matriz[i][Dc-1-i]);
+        }else{
+            System.out.println("Não Possui Diagonal Secundária");
+        }
+    }
+
+    public static void Questao12() {
+
+        int i,j,k;
+        int[][]m1=new int[3][3];
+        int[][]m2=new int[3][3];
+        int[][]m3=new int[3][3];
+
+        System.out.println("Digite os Valores da Primeira Matriz:");
+        for(i=0;i<3;i++)
+            for(j=0;j<3;j++)
+                m1[i][j]=sc.nextInt();
+        System.out.println("Digite os Valores da Segunda Matriz:");
+        for(i=0;i<3;i++)
+            for(j=0;j<3;j++)
+                m2[i][j]=sc.nextInt();
+        for(i=0;i<3;i++)
+            for(j=0;j<3;j++)
+                for(k=0;k<3;k++)
+                    m3[i][j]+=m1[i][k]*m2[k][j];
+        System.out.printf("Matriz 1:\n");
+        for(i=0;i<3;i++){
+            for(j=0;j<3;j++)
+                System.out.printf("%3d ",m1[i][j]);
+            System.out.println();
+        }
+        System.out.printf("Matriz 2:\n");
+        for(i=0;i<3;i++){
+            for(j=0;j<3;j++)
+                System.out.printf("%3d ",m2[i][j]);
+            System.out.println();
+        }
+        System.out.println("Resultado M1 x M2:");
+        for(int[]linha:m3) {
+            for(int val:linha)
+                System.out.printf("%3d ",val);
+            System.out.println();
+        }
+    }
+
+    public static void Questao13() {
+
+        int i,j;
+        int[][]m1=new int[2][2];
+        int[][]m2=new int[2][2];
+        int[][]m3=new int[2][2];
+
+        System.out.println("Digite os Valores da Primeira Matriz (2x2):");
+        for(i=0;i<2;i++)
+            for(j=0;j<2;j++)
+                m1[i][j]=sc.nextInt();
+        System.out.println("Digite os Valores da Segunda Matriz (2x2):");
+        for(i=0;i<2;i++)
+            for (j=0;j<2;j++)
+                m2[i][j]=sc.nextInt();
+        for(i=0;i<2;i++)
+            for (j=0;j<2;j++)
+                m3[i][j]=m1[i][j]+m2[i][j];
+        System.out.println("Matriz 1:");
+        for(i=0;i<2;i++){
+            for(j=0;j<2;j++)
+                System.out.printf("%3d ",m1[i][j]);
+            System.out.println();
+        }
+        System.out.println("Matriz 2:");
+        for(i=0;i<2;i++){
+            for(j=0;j<2;j++)
+                System.out.printf("%3d ",m2[i][j]);
+            System.out.println();
+        }
+        System.out.println("Resultado M1 + M2:");
+        for(int[]linha:m3) {
+            for (int val:linha)
+                System.out.printf("%3d ",val);
+            System.out.println();
+        }
+    }
+
+    public static void Questao14() {
+
+        int[][]matriz=new int[3][3];
+        int i,j,soma;
+        soma=0;
+
+        System.out.println("Digite os Valores da Matriz (3x3):");
+        for(i=0;i<3;i++)
+            for(j=0;j<3;j++)
+                matriz[i][j]=sc.nextInt();
+        System.out.println("Matriz:");
+        for(i=0;i<3;i++)
+            for(j=0;j<3;j++)
+                System.out.printf("%3d ",matriz[i][j]);
+                System.out.println();
+        for(i=0;i<3;i++)
+            soma=soma+matriz[i][i];
+        System.out.printf("Soma diagonal: %d",soma);
+    }
+
+    public static void Questao15() {
+
+        int Dl, Dc,i,j;
+
+        System.out.print("Digite a Dimensão da Linha: ");
+        Dl=sc.nextInt();
+        System.out.print("Digite a Dimensão da Coluna: ");
+        Dc=sc.nextInt();
+        if (Dl != Dc) {
+            System.out.println("Erro! A matriz deve ser quadrada");
+            return;
+        }
+        int[][] matriz = new int[Dl][Dc];
+        System.out.printf("Digite os valores da matriz de %d x %d (%d elementos):\n", Dl, Dc, Dl * Dc);
+        for (i=0;i<Dl;i++) {
+            for (j=0;j<Dc;j++) {
+                matriz[i][j]=sc.nextInt();
+            }
+        }
+        System.out.println("Matriz dividida por 2:");
+        for (i=0;i<Dl;i++) {
+            for (j=0;j<Dc;j++) {
+                System.out.printf("%3d ",matriz[i][j]/2);
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main() throws InterruptedException {
+
+        MenuQuestao();
+
+        do {
+            switch(questao){
+                case 1:
+                    Questao01();
+                    break;
+                case 2:
+                    Questao02();
+                    break;
+                case 3:
+                    Questao03();
+                    break;
+                case 4:
+                    Questao04();
+                    break;
+                case 5:
+                    Questao05();
+                    break;
+                case 6:
+                    Questao06();
+                    break;
+                case 7:
+                    Questao07();
+                    break;
+                case 8:
+                    Questao08();
+                    break;
+                case 9:
+                    Questao09();
+                    break;
+                case 10:
+                    Questao10();
+                    break;
+                case 11:
+                    Questao11();
+                    break;
+                case 12:
+                    Questao12();
+                    break;
+                case 13:
+                    Questao13();
+                    break;
+                case 14:
+                    Questao14();
+                    break;
+                case 15:
+                    Questao15();
+                    break;
+                default:
+                    System.out.println("Questão Inválida!");
+            }
+            System.out.println("Digite Outra Questão ou 0 para Sair:");
+            questao = sc.nextInt();
+        } while (questao != 0);
+    }
+}
